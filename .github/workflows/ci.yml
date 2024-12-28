@@ -26,12 +26,16 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run test:ci
+    
     - name: Report Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2
       if: always()
       with:
         files: |
           junit.xml
+      
+    - name: Setup LCOV
+      uses: hrishikesh-kadam/setup-lcov@v1
     - name: Report code coverage
       uses: zgosalvez/github-actions-report-lcov@v3
       with:
