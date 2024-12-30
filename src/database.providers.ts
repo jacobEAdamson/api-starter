@@ -6,9 +6,10 @@ import winstonLoggerConfig from './winston-logger.config';
 
 const logger = winston.createLogger(winstonLoggerConfig);
 
+export const SEQUELIZE_PROVIDER = 'SEQUELIZE';
 export const databaseProviders = [
   {
-    provide: 'SEQUELIZE',
+    provide: SEQUELIZE_PROVIDER,
     useFactory: async () => {
       const sequelize = new Sequelize({
         database: 'some_db',

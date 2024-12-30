@@ -6,11 +6,12 @@ import { Logger } from 'winston';
 
 import UserModel from './user.model';
 import { BaseController } from './base-controller';
+import { SEQUELIZE_PROVIDER } from './database.providers';
 
 @Controller('users')
 export class UserController extends BaseController {
   constructor(
-    @Inject('SEQUELIZE') private sequelize: Sequelize,
+    @Inject(SEQUELIZE_PROVIDER) private sequelize: Sequelize,
     @Inject(WINSTON_MODULE_PROVIDER) protected readonly logger: Logger,
   ) {
     super(logger);
