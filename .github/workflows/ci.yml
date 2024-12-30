@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ $default-branch ]
+    branches: [ master ]
   pull_request:
-    branches: [ $default-branch ]
+    branches: [ master ]
   workflow_dispatch:
 
 jobs:
@@ -38,6 +38,3 @@ jobs:
       uses: paambaati/codeclimate-action@v9.0.0
       env:
         CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
-      # with:
-      #   coverageLocations: |
-      #     ${{github.workspace}}/*.lcov:lcov
