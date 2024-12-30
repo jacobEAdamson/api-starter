@@ -1,23 +1,20 @@
 import { Module } from '@nestjs/common';
+import { databaseProviders } from './database.providers';
+
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
-
-import { Sequelize } from 'sequelize-typescript';
-import UserModel from './user.model';
 import { UserController } from './user.controller';
-
-const sequelize = new Sequelize({
-  database: 'some_db',
-  dialect: 'sqlite',
-  username: 'root',
-  password: '',
-  storage: ':memory:',
-  repositoryMode: true,
-  models: [UserModel],
-});
+import winstonLoggerConfig from './winston-logger.config';
+import { WinstonModule } from 'nest-winston';
 
 @Module({
+  imports: [
+    // SentryModule.forRoot(),
+    WinstonModule.forRoot(winstonLoggerConfig),
+  ],
   controllers: [AppController, UserController],
-  providers: [AppService, { useValue: sequelize, provide: 'sequelize' }],
+  providers: [
+    ...databaseProviders,
+    // { provide: APP_FILTER, useClass: AppExceptionFilter },
+  ],
 })
 export class AppModule {}
