@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { UserController } from './user.controller';
 import { Sequelize } from 'sequelize-typescript';
 import UserModel from './user.model';
+import { SEQUELIZE_PROVIDER } from './database.providers';
 
 describe('UserController', () => {
   let app: TestingModule;
@@ -15,7 +16,7 @@ describe('UserController', () => {
     }).compile();
 
     userController = app.get(UserController);
-    sequelize = app.get('sequelize');
+    sequelize = app.get(SEQUELIZE_PROVIDER);
     await sequelize.sync({ force: true });
   });
 
